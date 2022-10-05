@@ -1,0 +1,23 @@
+{% extends 'layout-common-unloged.html' %}
+
+{% block title %}
+    <title>{{ category }}</title>
+{% endblock %}
+
+{% block linkcss %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/home.css') }}">
+{% endblock %}
+
+{% block content %}
+    <h2 class="text-center fw-bold mt-5">{{ category }}</h2>
+
+    <div id="gridImage" class="container my-5 text-center">
+        {% for image_info in db_images %}
+            <img onContextMenu="return false;" class="shadow-lg p-2 mb-3 mx-2 bg-body rounded" src="{{ url_for('static', filename='CorelDatabase/{}/{}'.format(image_info['class'], image_info['name'])) }}" alt="{{ image_path }}">
+        {% endfor %}
+    </div>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="bi bi-chevron-up"></i></button>
+    
+<script src="{{ url_for('static', filename='js/unloged/images_category.js') }}"></script>
+{% endblock %}

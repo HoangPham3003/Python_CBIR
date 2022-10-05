@@ -1,0 +1,19 @@
+{% extends 'layout-common-loged.html' %}
+
+{% block title %}
+    <title>About us</title>
+{% endblock %}
+
+{% block linkcss %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="content" id="login_page">
+    <div class="container py-5">
+        <div class="card py-5">
+            <h2 class="fw-bold text-center">ABOUT US</h2>
+        </div>
+    </div>
+</div>
+{% endblock %}

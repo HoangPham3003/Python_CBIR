@@ -1,0 +1,153 @@
+{% extends 'layout-common-loged.html' %}
+
+{% block title %}
+    <title>User Profile</title>
+{% endblock %}
+
+
+{% block linkcss %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/user/user_profile.css') }}">
+{% endblock %}
+
+
+{% block content %}
+<div class="content" id="profile_page">
+    <div class="container py-5">
+        <div class="card py-5">
+            <h2 class="text-center fw-bold">PROFILE</h2>
+            <div class="row">
+                <div class="col-md-6 mt-2">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 pt-3">
+                            <div class="mb-4">
+                                <h3 class="fw-bold">Personal Information</h3>
+                            </div>
+                            <form>
+                                <div class="form-group my-3">
+                                    <label for="emailAddress" class="mb-1 fw-bold">E-mail:</label>
+                                    <input type="email" class="form-control form-control-lg w-100" id="emailAddress" name="emailAddress" value="{{ user_info['User_Email'] }}" disabled>
+                                </div>
+
+                                <div class="form-group my-3">
+                                    <label for="firstName" class="mb-1 fw-bold">First Name:</label>
+                                    <input type="text" class="form-control form-control-lg w-100" id="firstName" name="firstName" value="{{ user_info['User_FirstName'] }}" required>
+                                </div>
+
+                                <div class="form-group my-3">
+                                    <label for="lastName" class="mb-1 fw-bold">Last Name:</label>
+                                    <input type="text" class="form-control form-control-lg w-100" id="lastName" name="lastName" value="{{ user_info['User_LastName'] }}" required>
+                                </div>
+
+                                <div class="form-group my-3">
+                                    <label for="birthdayDate" class="mb-1 fw-bold">Date of Birth:</label>
+                                    <input type="date" class="form-control form-control-lg w-100" id="birthdayDate" name="birthdayDate" value="{{ user_info['User_Dob'] }}" required>
+                                </div>
+
+                                {% if user_info['User_Gender'] == 0 %}
+                                    <div class="">
+                                        <h6 class="mb-2 pb-1 fw-bold">Gender: </h6>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="femaleGender">Female</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="female" checked />
+                                        </div>
+    
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="maleGender">Male</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="maleGender" value="male" />
+                                        </div>
+    
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="otherGender">Other</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="otherGender" value="other" />
+                                        </div>
+                                    </div>
+                                {% elif user_info['User_Gender'] == 1 %}
+                                    <div class="">
+                                        <h6 class="mb-2 pb-1 fw-bold">Gender: </h6>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="femaleGender">Female</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="female" />
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="maleGender">Male</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="maleGender" value="male" checked />
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="otherGender">Other</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="otherGender" value="other" />
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="">
+                                        <h6 class="mb-2 pb-1 fw-bold">Gender: </h6>
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="femaleGender">Female</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="female" />
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="maleGender">Male</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="maleGender" value="male" />
+                                        </div>
+
+                                        <div class="form-check form-check-inline">
+                                            <label class="form-check-label" for="otherGender">Other</label>
+                                            <input class="form-check-input" type="radio" name="gender" id="otherGender" value="other" checked/>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                                <div class="form-group my-3">
+                                    <label for="phoneNumber" class="mb-1 fw-bold">Phone Number:</label>
+                                    <input type="text" class="form-control form-control-lg w-100" id="phoneNumber" name="phoneNumber" value="{{ user_info['User_Phone'] }}" required>
+                                </div>
+
+                        
+                                <div id="error_update_profile_container" class="mt-3 w-100 pb-0 alert alert-danger d-none"></div>
+
+                                <div id="message_update_profile_container" class="mt-3 w-100 pb-0 alert alert-success d-none"></div>
+                            </form>
+                            <button class="btn btn-lg btn-primary w-100 mt-1" onclick="update_profile()">Update</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mt-2">
+                    <div class="row justify-content-center">
+                        <div class="col-md-8 pt-3">
+                            <div class="mb-4">
+                                <h3 class="fw-bold">Change Password</h3>
+                            </div>
+                            <form>
+                                <div class="form-group mb-4 mt-3">
+                                    <label for="password" class="mb-1 fw-bold">Current Password</label>
+                                    <input type="password" class="form-control form-control-lg w-100" id="currentPassword" name="currentPassword" placeholder="Current password" required>
+                                </div>
+
+                                <div class="form-group mb-4 mt-3">
+                                    <label for="password" class="mb-1 fw-bold">New Password</label>
+                                    <input type="password" class="form-control form-control-lg w-100" id="newPassword" name="newPassword" placeholder="New password" required>
+                                </div>
+
+                                <div class="form-group mb-4 mt-3">
+                                    <label for="password" class="mb-1 fw-bold">Retype New Password</label>
+                                    <input type="password" class="form-control form-control-lg w-100" id="retypedNewPassword" name="retypedNewPassword" placeholder="Retype new password" required>
+                                </div>
+                        
+                                <div id="error_change_pwd_container" class="mt-3 w-100 pb-0 alert alert-danger d-none"></div>
+
+                                <div id="message_change_pwd_container" class="mt-3 w-100 pb-0 alert alert-success d-none"></div>
+                                
+                            </form>
+                            <button class="btn btn-lg btn-primary w-100 mt-1" onclick="change_pwd()">Change</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='js/user/user_profile.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'layout-common-loged.html' %}
+
+{% block title %}
+    <title>Home page</title>
+{% endblock %}
+
+{% block linkcss %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home/home.css') }}">
+{% endblock %}
+
+{% block content %}
+    <input type="file" id="myUploadImage" name="myUploadImage" accept="image/*" onchange="loadFile(event)"/>
+    <!-- <h1 class="text-center m-5">Search image</h1> -->
+    <div class="upload" id="uploadview">
+        <div class="upload-section" id="dropContainer">
+            <label class="btn-upload" for="myUploadImage">
+                <i class="bi bi-upload fw-bold"></i> &nbsp&nbsp UPLOAD IMAGE 
+            </label>
+            <p>or Drag and Drop image</p>
+        </div>
+        <p class="error" id="err">
+            ⚠️ Can not upload this file!
+        </p>
+    </div>
+
+
+    <div id="result">
+        <ul class="tab-menu" id="tab">
+            <li class="tab-active" id="original">
+                <a> Query </a>
+            </li>
+            <li id="gray">
+                <a> Gray </a>
+            </li>
+        </ul>
+        <div class="image">
+            <img class="img-upload" id="showUploadImage" />
+            <div class="download">
+                <button onclick="downloadImage()">Download</button>
+                <a id="download" download></a>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="gridImage" class="container mt-5 text-center">
+        {% for image_info in db_images %}
+            <img class="shadow-lg p-2 mb-3 mx-2 bg-body rounded" src="{{ url_for('static', filename='CorelDatabase/{}/{}'.format(image_info['class'], image_info['name'])) }}" alt="{{ image_path }}">
+        {% endfor %}
+    </div>
+
+    <div id="pagination">Hello</div>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="bi bi-chevron-up"></i></button>
+    
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+{% endblock %}
