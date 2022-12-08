@@ -4,15 +4,52 @@ import cv2
 import matplotlib.pyplot as plt
 
 
-ksize = 5
-sigma = 3
-theta = 2 * np.pi / 4
-lambd = 1 * np.pi / 4
-gamma = 0.5
-psi = 0
-ktype = cv2.CV_32F
+# for idx_orientation in range(n_thetas):
+#     theta = idx_orientation * step
+#     for sigma in sigmas:
+#         for lambd in lambds:
+#             for gamma in gammas:
+#                 kernel = cv2.getGaborKernel(ksize=ksize, sigma=sigma, theta=theta, lambd=lambd, gamma=gamma, psi=psi)
+#                 bank_filters.append(kernel)
 
-kernel = cv2.getGaborKernel(ksize=(ksize, ksize), sigma=sigma, theta=theta, lambd=lambd, gamma=gamma, psi=psi, ktype=ktype)
+
+# index = 0
+# for i in range(4):
+#     for j in range(8):
+#         filter_image = bank_filters[index]
+#         axes.append(fig.add_subplot(4, 8, index + 1))
+#         # axes[-1].set_title(filter_image)
+#         plt.imshow(filter_image, cmap='gray')
+#         plt.axis('off')
+#         index += 1
+# fig.tight_layout()
+# plt.show()
+
+# image_path = "P:/data_test/1.jpg"
+# # image_path = "P:/cbir/DATA/corel/CorelDB/pl_flower/84007.jpg"
+# img = cv2.imread(image_path)
+# # img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+# img = cv2.cvtColor(img, cv2.COLOR_BGR2YCrCb)
+# img = img[:,:,0]
+
+# axes = []
+# fig = plt.figure(figsize=(12, 6))
+
+# print(bank_filters[0])
+
+# index = 0
+# for i in range(4):
+#     for j in range(8):
+#         kernel = bank_filters[index]
+#         res = cv2.filter2D(src=img, ddepth=-1, kernel=kernel)
+#         axes.append(fig.add_subplot(4, 8, index + 1))
+#         plt.imshow(res, cmap='gray')
+#         plt.axis('off')
+#         index += 1
+# fig.tight_layout()
+# plt.show()
+
+
 
 image_path = "P:/cbir/CBIR_WORKSPACE/data/art_1/193009.jpg"
 
